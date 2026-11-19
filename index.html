@@ -3,444 +3,500 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shae — 3D Interior & Architectural Visualizer</title>
-  <meta name="description" content="Curated 3D architectural and interior visualization portfolio." />
+  <title>View Casa — Premium Architectural CGI Studio</title>
+  <meta name="description" content="View Casa produces photorealistic architectural visualisation for architects, designers, and developers — exteriors, interiors, and short films for planning, presentations, and sales." />
+  
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQXWZNQ425"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JQXWZNQ425');
+  </script>
 
-  <!-- Editorial Typography -->
+  <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:3692938,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'design-black': '#050505',
-            'design-muted': '#737373',
-          },
-          fontFamily: {
-            sans: ['"Inter"', 'sans-serif'],
-            serif: ['"Playfair Display"', 'serif'],
-          }
-        }
-      }
+      theme: { extend: { colors: { 'vc-black': '#0B0B0C', 'vc-dark': '#111113', 'vc-border': '#1F1F22', 'vc-zinc': '#A1A1AA' }, fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] }, letterSpacing: { widest: '0.25em' } } }
     }
   </script>
-
+  
   <style>
-    body {
-      background-color: #050505;
-      color: #F5F5F5;
-      font-family: 'Inter', sans-serif;
-      -webkit-font-smoothing: antialiased;
+    html, body { background: #0B0B0C; color: #FFFFFF; font-family: 'Inter', sans-serif; }
+
+    .hero-bg {
+      background-image:
+        linear-gradient(to right, rgba(11,11,12,0.92) 0%, rgba(11,11,12,0.70) 50%, rgba(11,11,12,0.15) 100%),
+        url('assets/hero-render.jpg');
+      background-size: cover;
+      background-position: center 30%;
     }
     
-    .glass-nav {
-      background: rgba(5, 5, 5, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+    @media (max-width: 768px) {
+      .hero-bg {
+        background-position: 65% center;
+      }
+      .portfolio-overlay {
+        opacity: 1 !important;
+        background: linear-gradient(to top, rgba(11,11,12,0.98) 0%, rgba(11,11,12,0.7) 60%, transparent 100%) !important;
+      }
+      .portfolio-overlay p {
+        text-shadow: 0 1px 4px rgba(0,0,0,0.9) !important;
+      }
     }
 
-    /* Cinematic Hover Zoom */
-    .img-container {
-      overflow: hidden;
-      background-color: #111;
+    .portfolio-img {
+      background: #111113;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      display: block;
+      transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.3s ease;
     }
-    .img-zoom {
-      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
-      will-change: transform;
-    }
-    .project-card:hover .img-zoom {
-      transform: scale(1.04);
-      filter: brightness(0.85);
+    .portfolio-item:hover .portfolio-img { transform: scale(1.04); filter: brightness(0.75); }
+
+    .variation-img {
+      background: #1a1a1c;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
-    /* Subtle fade-up animation for loading */
-    .fade-up {
-      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Scrollable Lightbox */
     #lightbox {
       display: none;
-      position: fixed; inset: 0; z-index: 100;
-      background: rgba(5, 5, 5, 0.98);
-      overflow-y: auto;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.96);
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(6px);
     }
-    #lightbox.active { display: block; }
+    #lightbox.active { display: flex; }
+    #lightbox-img {
+      max-width: 92vw; max-height: 88vh;
+      object-fit: contain;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    #lightbox-close {
+      position: fixed; top: 1.5rem; right: 1.75rem;
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.2rem; color: #fff;
+      transition: background 0.2s;
+    }
+    #lightbox-close:hover { background: rgba(255,255,255,0.18); }
+
+    .nav-glass {
+      background: rgba(11,11,12,0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .variation-grid img { display: block; }
+
+    .section-label {
+      font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: #A1A1AA; font-weight: 500;
+    }
+
+    .btn-white { transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease; }
+    .btn-white:hover { background: #e4e4e7 !important; transform: translateY(-1px); }
+
+    .cap-card { transition: border-color 0.3s ease, background 0.3s ease; }
+    .cap-card:hover { border-color: rgba(255,255,255,0.18) !important; background: #18181a !important; }
+
+    .play-btn {
+      width: 72px; height: 72px;
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.25s, transform 0.2s;
+      cursor: pointer;
+    }
+    .play-btn:hover { background: rgba(255,255,255,0.22); transform: scale(1.06); }
+
+    .testi-card {
+      border: 1px solid #1F1F22;
+      transition: border-color 0.3s ease;
+    }
+    .testi-card:hover { border-color: rgba(255,255,255,0.14); }
+
+    .img-placeholder {
+      background: linear-gradient(135deg, #111113 0%, #1a1a1e 100%);
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 100%;
+      position: absolute; inset: 0;
+    }
   </style>
 </head>
 
-<body class="antialiased">
+<body class="bg-vc-black text-white antialiased">
 
-  <!-- Minimal Navigation -->
-  <header class="glass-nav fixed top-0 left-0 right-0 z-40 transition-all duration-300">
-    <div class="max-w-[90rem] mx-auto px-6 md:px-12 h-24 flex items-center justify-between">
-      <a href="#hero" class="font-serif italic text-xl tracking-wide text-white hover:opacity-70 transition">
-        Shae.
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+      <a href="index.html" class="text-white font-bold tracking-widest uppercase text-sm select-none">
+        VIEW CASA
       </a>
-      
-      <div class="flex items-center gap-8 text-[11px] tracking-[0.2em] text-design-muted uppercase font-medium">
-        <a href="#work" class="hidden md:block hover:text-white transition">Selected Works</a>
-        <a href="#contact" class="text-white hover:opacity-70 transition">Contact</a>
+      <a href="quote.html"
+         class="btn-white bg-white text-black text-xs font-semibold tracking-wider uppercase px-5 py-2.5 rounded-none">
+        Request Quote
+      </a>
+    </div>
+  </nav>
+
+  <section class="hero-bg min-h-screen flex items-center pt-16">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-24 md:py-36">
+      <div class="max-w-2xl">
+        <p class="section-label mb-6">Premium Architectural CGI Studio</p>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-light leading-[1.05] tracking-tight text-white mb-8">
+          From Concept<br class="hidden sm:block" /> to Presentation.<br />
+          <span class="text-zinc-400">Photorealistic CGI</span><br />
+          for Architects & Developers.
+        </h1>
+        <p class="text-vc-zinc text-base md:text-lg font-light leading-relaxed mb-10 max-w-lg">
+          Exteriors, interiors, and short films for planning applications, client presentations, and sales — before a single foundation is poured.
+        </p>
+        <a href="quote.html"
+           class="btn-white inline-block bg-white text-black text-sm font-semibold tracking-wider uppercase px-8 py-4">
+          Request a Quote
+        </a>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
+  <!-- Featured film sits immediately under the hero so cold traffic sees the strongest project first -->
+  <section class="bg-vc-dark py-24 md:py-32 border-b border-vc-border">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <p class="section-label mb-4">Featured Project</p>
+      <h2 class="text-4xl md:text-5xl font-light tracking-tight mb-4 max-w-xl leading-tight">
+        The Essex Estate
+      </h2>
+      <p class="text-vc-zinc font-light text-sm leading-relaxed mb-12 max-w-lg">
+        Cinematic walkthrough of a high-end UK residence. Built for client presentation and marketing.
+      </p>
 
-    <!-- Editorial Hero -->
-    <section id="hero" class="min-h-screen flex flex-col justify-center pt-32 pb-12">
-      <div class="max-w-[90rem] mx-auto px-6 md:px-12 w-full fade-up">
-        
-        <p class="text-[11px] tracking-[0.2em] uppercase text-design-muted mb-8 font-medium">
-          3D Visualizer / Interior Design · Bangkok
-        </p>
-
-        <h1 class="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tight leading-[1.05] text-white max-w-6xl mb-12">
-          Crafting spatial realism through precise <span class="italic text-neutral-400">lighting</span> and <span class="italic text-neutral-400">materiality</span>.
-        </h1>
-
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-16 pt-12 border-t border-neutral-900">
-          <div class="md:col-span-7 lg:col-span-5">
-            <p class="text-neutral-400 text-sm md:text-base font-light leading-relaxed">
-              Specialized in translating 2D concepts into high-fidelity 3D spatial models and photorealistic perspectives. Combining architectural discipline with a deep understanding of PBR texturing, millwork detailing, and bespoke interior environments.
-            </p>
+      <div class="relative w-full" style="aspect-ratio: 16/9;" id="film-container">
+        <div id="film-thumb" class="absolute inset-0 cursor-pointer group"
+             onclick="playFilm()">
+          <img src="assets/vimeo-thumb.jpg" alt="View Casa — The Essex Estate cinematic film"
+               class="w-full h-full object-cover"
+               onerror="this.style.display='none';document.getElementById('film-ph').style.display='flex'" />
+          <div id="film-ph" class="img-placeholder" style="display:none">
+            <svg class="opacity-20" width="80" height="80" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="4" fill="#fff"/><path d="M32 24l24 16-24 16V24z" fill="#0B0B0C"/></svg>
           </div>
-          <div class="md:col-span-5 lg:col-span-3 lg:col-start-9 flex flex-col gap-6">
-            <div>
-              <p class="text-[10px] tracking-[0.2em] uppercase text-design-muted mb-2">Capabilities</p>
-              <ul class="text-sm font-light text-neutral-300 space-y-1">
-                <li>SketchUp & 3ds Max Modeling</li>
-                <li>V-Ray / Corona Rendering</li>
-                <li>Physically Based Materials & Lighting</li>
-                <li>Millwork & Joinery Detailing</li>
-                <li>Photoshop, Illustrator & AI Workflows</li>
-                <li>2D-to-3D Translation & Full Pipeline</li>
-              </ul>
+          <div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="play-btn" aria-label="Play film">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 5.5L18 11L8 16.5V5.5Z" fill="white"/>
+              </svg>
             </div>
           </div>
+          <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
+            <p class="text-white text-sm font-light tracking-wide">The Essex Estate — Cinematic Architectural Film</p>
+          </div>
         </div>
-        
-        <!-- Header Focal Image -->
-        <div class="mt-20 w-full aspect-[16/9] md:aspect-[21/9] img-container">
-          <img src="assets/hero-render.jpg" alt="Featured Architectural Render" class="w-full h-full object-cover img-zoom" onerror="this.src='assets/portfolio-05.jpg'">
-        </div>
-
+        <div id="film-iframe" class="absolute inset-0" style="display:none;"></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Asymmetric Curated Gallery -->
-    <section id="work" class="py-24">
-      <div class="max-w-[90rem] mx-auto px-6 md:px-12">
-        
-        <div class="mb-20">
-          <h2 class="text-4xl md:text-5xl font-serif tracking-tight text-white">Selected Works</h2>
-        </div>
+  <section class="bg-vc-black py-24 md:py-32 border-b border-vc-border">
+    <div class="max-w-4xl mx-auto px-6 md:px-10 text-center">
+      <p class="section-label mb-8">The Studio</p>
+      <p class="text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed tracking-tight text-white">
+        View Casa turns architectural drawings into detailed, photorealistic visuals. We produce exterior renders, atmospheric interiors, and short animations for architects, designers, and developers — for planning, presentations, and marketing.
+      </p>
+    </div>
+  </section>
 
-        <!-- Project Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-20" id="portfolio-container">
-          <!-- JS will inject HTML here -->
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Cinematic Spatial Walkthrough -->
-    <section id="motion" class="py-32">
-      <div class="max-w-[90rem] mx-auto px-6 md:px-12">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <div>
-            <h2 class="text-4xl md:text-5xl font-serif tracking-tight text-white mb-4">
-              Spatial Motion
-            </h2>
-            <p class="text-neutral-400 text-sm font-light leading-relaxed max-w-lg">
-              Evaluating sightlines, volume, and transition lighting through continuous camera motion.
-            </p>
-          </div>
-        </div>
-
-        <div class="relative w-full aspect-video img-container border border-neutral-900" id="film-box">
-          <div id="film-cover" class="absolute inset-0 cursor-pointer group" onclick="playFilm()">
-            <img src="assets/vimeo-thumb.jpg" alt="Cinematic Architectural Film" class="w-full h-full object-cover img-zoom opacity-80 group-hover:opacity-100 transition duration-700" onerror="this.src='assets/hero-render.jpg'">
-            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <div class="w-20 h-20 rounded-full border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:border-white transition duration-500 backdrop-blur-sm bg-white/5">
-                <svg width="24" height="24" viewBox="0 0 20 20" fill="white" class="ml-1">
-                  <path d="M6 4l12 6-12 6V4z"/>
-                </svg>
-              </div>
-            </div>
-            <div class="absolute bottom-8 left-8 text-[10px] tracking-[0.2em] uppercase text-neutral-300">
-              4K Spatial Animation
-            </div>
-          </div>
-          <div id="film-player" class="absolute inset-0 hidden"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Refined Material Studies -->
-    <section id="technical" class="py-32">
-      <div class="max-w-[90rem] mx-auto px-6 md:px-12">
-        
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-24 items-start">
-          <div class="md:col-span-5 sticky top-32">
-            <h2 class="text-4xl md:text-5xl font-serif tracking-tight text-white mb-6">
-              Materiality & Iteration
-            </h2>
-            <p class="text-neutral-400 text-sm font-light leading-relaxed mb-8">
-              Fast, side-by-side exploration of timber grains, concrete density, and bespoke finishes. Ensuring physically accurate reflectivity, diffuse channels, and roughness maps for critical client approvals.
-            </p>
-            <div class="space-y-6 border-t border-neutral-900 pt-8">
-              <div class="flex justify-between items-baseline border-b border-neutral-900 pb-4">
-                <span class="text-xs uppercase tracking-widest text-neutral-300">Spec 01</span>
-                <span class="text-sm font-serif italic text-neutral-500">White Oak Entrance Detail</span>
-              </div>
-              <div class="flex justify-between items-baseline border-b border-neutral-900 pb-4">
-                <span class="text-xs uppercase tracking-widest text-neutral-300">Spec 02</span>
-                <span class="text-sm font-serif italic text-neutral-500">Benchmark Ash Cladding</span>
-              </div>
-              <div class="flex justify-between items-baseline border-b border-neutral-900 pb-4">
-                <span class="text-xs uppercase tracking-widest text-neutral-300">Spec 03</span>
-                <span class="text-sm font-serif italic text-neutral-500">Alternative Cladding Profile</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="md:col-span-7 grid grid-cols-2 gap-4">
-            <div class="col-span-2 img-container w-full aspect-[16/9]">
-              <img src="assets/variation-01.jpg" alt="White Oak Entrance Detail" class="w-full h-full object-cover img-zoom">
-            </div>
-            <div class="img-container w-full aspect-[3/4]">
-              <img src="assets/variation-02.jpg" alt="Benchmark Ash Cladding" class="w-full h-full object-cover img-zoom">
-            </div>
-            <div class="img-container w-full aspect-[3/4]">
-              <img src="assets/variation-03.jpg" alt="Alternative Cladding Profile" class="w-full h-full object-cover img-zoom">
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Editorial Contact Section -->
-    <section id="contact" class="py-40 border-t border-neutral-900 mt-20">
-      <div class="max-w-[90rem] mx-auto px-6 md:px-12 text-center">
-        <p class="text-[11px] tracking-[0.2em] uppercase text-design-muted mb-6 font-medium">
-          Located in Bangkok, Thailand
-        </p>
-        <h2 class="text-5xl md:text-7xl font-serif text-white tracking-tight mb-16">
-          Seeking opportunities <br class="hidden md:block"/> in 3D visualization.
+  <section class="bg-vc-dark py-24 md:py-32 border-b border-vc-border">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <p class="section-label mb-4">The Portfolio</p>
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+        <h2 class="text-4xl md:text-5xl font-light tracking-tight leading-tight max-w-lg">
+          Selected Work
         </h2>
-        
-        <div class="flex flex-col items-center gap-6">
-          
-          <a href="mailto:shaeleekelly@icloud.com" class="text-lg md:text-xl font-medium tracking-wide border-b border-white pb-1 hover:text-neutral-400 hover:border-neutral-400 transition-colors">
-            shaeleekelly@icloud.com
-          </a>
-          
-          <div class="flex flex-col sm:flex-row items-center gap-5 mt-4">
-            <a href="tel:+66936302137" class="text-sm text-neutral-400 font-medium tracking-widest hover:text-white transition-colors">
-              +66 093 630 2137
-            </a>
-            
-            <span class="hidden sm:block text-neutral-700">|</span>
-            
-            <div class="flex items-center gap-5">
-              <!-- WhatsApp link using your phone number -->
-              <a href="https://wa.me/66936302137" target="_blank" rel="noopener noreferrer" class="text-sm text-neutral-400 font-medium tracking-widest hover:text-[#25D366] transition-colors flex items-center gap-2">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                </svg>
-                LINE
-              </a>
-            </div>
-          </div>
+        <p class="text-vc-zinc text-sm font-light max-w-xs leading-relaxed">
+          Click any image to open the full-screen viewer. Each project is rendered at print-grade resolution.
+        </p>
+      </div>
 
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-vc-border" id="portfolio-grid">
+        </div>
+    </div>
+  </section>
+
+  <section class="bg-vc-black py-24 md:py-32 border-b border-vc-border">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <p class="section-label mb-4">What We Deliver</p>
+      <h2 class="text-4xl md:text-5xl font-light tracking-tight mb-16 max-w-xl leading-tight">
+        Core Capabilities
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-vc-border">
+        <div class="cap-card bg-vc-dark p-8 md:p-10 border border-transparent">
+          <div class="w-10 h-px bg-white mb-8"></div>
+          <h3 class="text-lg font-semibold tracking-tight text-white mb-4">
+            Architectural Visualisation
+          </h3>
+          <p class="text-vc-zinc font-light leading-relaxed text-sm">
+            Photorealistic exterior renders capturing environmental context, sophisticated materials, and precise lighting dynamics. Working from SketchUp, Revit, ArchiCAD, or 2D CAD.
+          </p>
+        </div>
+        <div class="cap-card bg-vc-dark p-8 md:p-10 border border-transparent">
+          <div class="w-10 h-px bg-white mb-8"></div>
+          <h3 class="text-lg font-semibold tracking-tight text-white mb-4">
+            Interior Visualisation
+          </h3>
+          <p class="text-vc-zinc font-light leading-relaxed text-sm">
+            Atmospheric interiors curated down to materials, lighting, and spatial realism — for client meetings, sales suites, and marketing.
+          </p>
+        </div>
+        <div class="cap-card bg-vc-dark p-8 md:p-10 border border-transparent">
+          <div class="w-10 h-px bg-white mb-8"></div>
+          <h3 class="text-lg font-semibold tracking-tight text-white mb-4">
+            Cinematic Animation
+          </h3>
+          <p class="text-vc-zinc font-light leading-relaxed text-sm">
+            Short walkthrough films that show scale, flow, and material quality for presentations and social campaigns.
+          </p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <section class="bg-vc-dark py-24 md:py-32 border-b border-vc-border">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <p class="section-label mb-4">Client Notes</p>
+      <h2 class="text-4xl md:text-5xl font-light tracking-tight mb-14 max-w-md leading-tight">
+        What Studios Say
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-  <footer class="py-12 text-center border-t border-neutral-900">
-    <p class="text-[10px] tracking-[0.2em] uppercase text-neutral-600">
-      Shae · 3D Architectural & Interior Visualization
-    </p>
+        <div class="testi-card bg-vc-black p-8 flex flex-col justify-between min-h-[280px]">
+          <div>
+            <blockquote class="text-white font-light leading-relaxed text-base mb-8">
+              "Clear communication and the stills matched the brief for our planning submission. Materials and lighting were handled carefully."
+            </blockquote>
+          </div>
+          <div class="flex items-center gap-3 pt-6 border-t border-vc-border">
+            <div class="w-9 h-9 rounded-full bg-vc-border flex items-center justify-center text-xs font-semibold text-vc-zinc">JW</div>
+            <div>
+              <p class="text-white text-sm font-medium">James Whitfield</p>
+              <p class="text-vc-zinc text-xs">Architect, United Kingdom</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card bg-vc-black p-8 flex flex-col justify-between min-h-[280px]">
+          <div>
+            <blockquote class="text-white font-light leading-relaxed text-base mb-8">
+              "We needed two strong exteriors for a client presentation. Turnaround was reliable and the revisions were straightforward."
+            </blockquote>
+          </div>
+          <div class="flex items-center gap-3 pt-6 border-t border-vc-border">
+            <div class="w-9 h-9 rounded-full bg-vc-border flex items-center justify-center text-xs font-semibold text-vc-zinc">CD</div>
+            <div>
+              <p class="text-white text-sm font-medium">Claire Donovan</p>
+              <p class="text-vc-zinc text-xs">Residential Design Studio</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card bg-vc-black p-8 flex flex-col justify-between min-h-[280px]">
+          <div>
+            <blockquote class="text-white font-light leading-relaxed text-base mb-8">
+              "Good eye for proportion and material. The interiors read clearly in meetings and we didn't have to explain the design twice."
+            </blockquote>
+          </div>
+          <div class="flex items-center gap-3 pt-6 border-t border-vc-border">
+            <div class="w-9 h-9 rounded-full bg-vc-border flex items-center justify-center text-xs font-semibold text-vc-zinc">AR</div>
+            <div>
+              <p class="text-white text-sm font-medium">Alex Rahman</p>
+              <p class="text-vc-zinc text-xs">Interior Practice</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Variations moved to the bottom and labelled as a material study, not extra portfolio padding -->
+  <section class="bg-vc-black py-24 md:py-32 border-b border-vc-border">
+    <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <p class="section-label mb-4">Process</p>
+      <h2 class="text-4xl md:text-5xl font-light tracking-tight mb-12 max-w-xl leading-tight">
+        Material & Lighting<br />Studies
+      </h2>
+      <p class="text-vc-zinc font-light text-sm leading-relaxed mb-12 max-w-lg">
+        The same house, three cladding options. Used when a client needs to compare materials before a sample is ordered — not as separate projects.
+      </p>
+    </div>
+    <div class="variation-grid grid grid-cols-1 md:grid-cols-3">
+      <div class="relative aspect-[4/3] overflow-hidden">
+        <img src="assets/variation-01.jpg" alt="Material Variation 01 — White Oak Entrance Detail"
+             class="variation-img w-full h-full object-cover"
+             onerror="this.style.display='none';this.parentElement.querySelector('.ph').style.display='flex'" />
+        <div class="ph img-placeholder" style="display:none">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="2" fill="#1f1f22"/><path d="M8 36l10-12 8 9 6-7 8 10H8z" fill="#2d2d31"/><circle cx="34" cy="16" r="5" fill="#2d2d31"/></svg>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+          <span class="text-xs font-medium tracking-widest uppercase text-vc-zinc">Study 01</span>
+          <p class="text-white text-sm font-light mt-0.5">White Oak Entrance Detail</p>
+        </div>
+      </div>
+      <div class="relative aspect-[4/3] overflow-hidden border-x border-vc-border">
+        <img src="assets/variation-02.jpg" alt="Material Variation 02 — Benchmark Ash Cladding"
+             class="variation-img w-full h-full object-cover"
+             onerror="this.style.display='none';this.parentElement.querySelector('.ph').style.display='flex'" />
+        <div class="ph img-placeholder" style="display:none">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="2" fill="#1f1f22"/><path d="M8 36l10-12 8 9 6-7 8 10H8z" fill="#2d2d31"/><circle cx="34" cy="16" r="5" fill="#2d2d31"/></svg>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+          <span class="text-xs font-medium tracking-widest uppercase text-vc-zinc">Study 02</span>
+          <p class="text-white text-sm font-light mt-0.5">Benchmark Ash Cladding</p>
+        </div>
+      </div>
+      <div class="relative aspect-[4/3] overflow-hidden">
+        <img src="assets/variation-03.jpg" alt="Material Variation 03 — Alternative Cladding Profile"
+             class="variation-img w-full h-full object-cover"
+             onerror="this.style.display='none';this.parentElement.querySelector('.ph').style.display='flex'" />
+        <div class="ph img-placeholder" style="display:none">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="2" fill="#1f1f22"/><path d="M8 36l10-12 8 9 6-7 8 10H8z" fill="#2d2d31"/><circle cx="34" cy="16" r="5" fill="#2d2d31"/></svg>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+          <span class="text-xs font-medium tracking-widest uppercase text-vc-zinc">Study 03</span>
+          <p class="text-white text-sm font-light mt-0.5">Alternative Cladding Profile</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-vc-dark py-28 md:py-40 border-b border-vc-border">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 text-center">
+      <p class="section-label mb-6">Start a Project</p>
+      <h2 class="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-tight mb-10 max-w-4xl mx-auto">
+        Ready to Start<br />the Next Project?
+      </h2>
+      <a href="quote.html"
+         class="btn-white inline-block bg-white text-black text-sm font-semibold tracking-wider uppercase px-10 py-5">
+        Request Your Custom Quote
+      </a>
+    </div>
+  </section>
+
+  <footer class="bg-vc-black py-10 border-t border-vc-border">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-4">
+      <span class="text-white font-bold tracking-widest uppercase text-sm">VIEW CASA</span>
+      <p class="text-vc-zinc text-xs font-light tracking-wide">
+        © 2026 View Casa CGI Studio. All rights reserved.
+      </p>
+      <div class="flex gap-6">
+        <a href="quote.html" class="text-vc-zinc hover:text-white text-xs font-light tracking-wider uppercase transition-colors">
+          Get a Quote
+        </a>
+        <a href="mailto:info@viewcasa.co" class="text-vc-zinc hover:text-white text-xs font-light tracking-wider uppercase transition-colors">
+          info@viewcasa.co
+        </a>
+      </div>
+    </div>
   </footer>
 
-  <!-- Scrollable Lightbox with Reference Integration -->
-  <div id="lightbox" role="dialog" aria-modal="true" class="transition-opacity duration-300" onclick="closeLightbox()">
-    <button class="fixed top-8 right-8 text-white text-4xl font-light hover:text-neutral-500 transition z-[101]" onclick="closeLightbox()">&times;</button>
-    
-    <div class="min-h-screen w-full flex flex-col items-center pt-24 pb-32 px-6 max-w-6xl mx-auto">
-      
-      <!-- Main Render -->
-      <img id="lb-image" src="" alt="Enlarged Render" class="max-h-[85vh] w-auto object-contain shadow-2xl" onclick="event.stopPropagation()">
-      
-      <!-- Dynamic References Section -->
-      <div id="lb-references" class="w-full mt-24 hidden" onclick="event.stopPropagation()">
-        
-        <div class="flex items-center gap-4 mb-12 w-full">
-          <div class="h-px bg-neutral-800 flex-grow"></div>
-          <h4 class="text-[10px] uppercase tracking-[0.2em] text-neutral-500 text-center">Project Concepts & Blueprints</h4>
-          <div class="h-px bg-neutral-800 flex-grow"></div>
-        </div>
-        
-        <!-- Image References Grid -->
-        <div id="lb-ref-img-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start justify-center">
-          <!-- JS injects images here -->
-        </div>
-        
-        <!-- PDF Downloads -->
-        <div id="lb-ref-pdf-container" class="mt-12 flex flex-wrap justify-center gap-4">
-          <!-- JS injects buttons here -->
-        </div>
-
-      </div>
-    </div>
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button id="lightbox-close" onclick="closeLightbox()" aria-label="Close viewer">&#x2715;</button>
+    <img id="lightbox-img" src="" alt="Portfolio image" />
+    <button id="lb-prev" onclick="shiftLightbox(-1)" aria-label="Previous image"
+            style="position:fixed;left:1.5rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:1.1rem;transition:background 0.2s">
+      &#8592;
+    </button>
+    <button id="lb-next" onclick="shiftLightbox(1)" aria-label="Next image"
+            style="position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:1.1rem;transition:background 0.2s">
+      &#8594;
+    </button>
+    <div id="lb-counter" style="position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:0.7rem;letter-spacing:0.2em;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"></div>
   </div>
 
   <script>
-    /* Full Project Data - REORDERED: Biophilic Villa at 0, Textural Living Space at 1 */
-    const PROJECTS = [
-      { id: "15", title: "Biophilic Villa & Water Features", category: "Exterior / Landscape", src: "assets/biophilic-villa-retreat.jpg" },
-      { id: "05", title: "Textural Living Space", category: "Interior / Ambient", src: "assets/portfolio-05.jpg" },
-      { id: "07", title: "Commercial Hospitality Suite", category: "Interior / Commercial", src: "assets/portfolio-07.jpg" },
-      { id: "02", title: "Bespoke Green Kitchen Joinery", category: "Millwork / Residential", src: "assets/portfolio-02.jpg" },
-      { id: "11", title: "Minimalist Monolithic Kitchen", category: "Interior / Contemporary", src: "assets/portfolio-11.jpg" },
-      { id: "13", title: "Contemporary Residential 50LLW", category: "Exterior / Residential", src: "assets/ahp-50llw.jpg",
-        refs: [
-          { type: 'img', src: 'assets/ahp-50llw.-house-image--reference.jpg' },
-          { type: 'img', src: 'assets/ahp-50llw.-design-reference.jpg' }
-        ]
-      },
-      { id: "14", title: "Commercial Retail Planning (Tesco)", category: "Exterior / Commercial", src: "assets/final-planning-file-render-tesco-feb-2025.png",
-        refs: [
-          { type: 'img', src: 'assets/ahp-design58-the-street-beck-row-suffolk-tesco-feb-2025-street-image-reference.png' },
-          { type: 'img', src: 'assets/ahp-design58-the-street-beck-row-suffolk-tesco-feb-2025-model-reference.png' },
-          { type: 'pdf', src: 'assets/ahp-final-planning-file-tesco-feb-2025.pdf', label: 'View Planning File (PDF)' }
-        ]
-      },
-      { id: "01", title: "Contemporary Architectural Facade", category: "Exterior / Daylight", src: "assets/portfolio-01.jpg",
-        refs: [
-          { type: 'img', src: 'assets/london-grey-brushed-&-tumbled-cobble-stone.jpeg' },
-          { type: 'img', src: 'assets/rms-london-grey-brushed-&-tumbled-cobble-stone-house-concept.png' },
-          { type: 'img', src: 'assets/rms-london-grey-brushed-&-tumbled-cobble-stone-house-concept-2.png' }
-        ]
-      },
-      { id: "10", title: "Covered Outdoor Lounge", category: "Exterior / Living", src: "assets/portfolio-10.jpg",
-        refs: [
-          { type: 'img', src: 'assets/marcella-material.jpg' },
-          { type: 'img', src: 'assets/rms-marcella-inspiration-1.png' }
-        ]
-      },
-      { id: "09", title: "Traditional Study & Custom Millwork", category: "Millwork / Heritage", src: "assets/portfolio-09.jpg" },
-      { id: "16", title: "Modernist Dual-Tone Facade", category: "Exterior / Residential", src: "assets/modernist-dual-tone-facade.jpg" },
-      { id: "12", title: "Tundra Grey Driveway Hardscaping", category: "Materiality / Site", src: "assets/portfolio-12.jpg",
-        refs: [
-          { type: 'img', src: 'assets/tundra-grey-cobblestones.png' }
-        ]
-      },
-      { id: "04", title: "Multi-Level Rear Terracing", category: "Exterior / Hardscape", src: "assets/portfolio-04.jpg",
-        refs: [
-          { type: 'pdf', src: 'assets/the-fens-crays-hill-drawings.pdf', label: 'View CAD / Drawings (PDF)' }
-        ]
-      },
-      { id: "03", title: "Ocean View & Infinity Pool", category: "Exterior / Cliffside", src: "assets/portfolio-03.jpg" },
-      { id: "08", title: "Indoor-Outdoor Spatial Transition", category: "Architecture / Flow", src: "assets/portfolio-08.jpg" },
-      { id: "06", title: "Angular Modernist Villa", category: "Exterior / High-Contrast", src: "assets/portfolio-06.jpg" }
+    const PORTFOLIO = [
+      { src: 'assets/portfolio-01.jpg', alt: 'Contemporary Architectural Facade', label: 'Exterior · Daylight' },
+      { src: 'assets/portfolio-02.jpg', alt: 'Bespoke Green Kitchen Joinery',     label: 'Interior · Heritage' },
+      { src: 'assets/portfolio-03.jpg', alt: 'Ocean View Overlook & Infinity Pool', label: 'Exterior · Cliffside' },
+      { src: 'assets/portfolio-04.jpg', alt: 'Multi-Level Rear Terracing', label: 'Exterior · Daylight' },
+      { src: 'assets/portfolio-05.jpg', alt: 'Textural Living Space with Fireplace', label: 'Interior · Ambient' },
+      { src: 'assets/portfolio-06.jpg', alt: 'Angular Modernist Villa',           label: 'Exterior · High-Contrast' },
+      { src: 'assets/portfolio-07.jpg', alt: 'Commercial Hospitality Suite',      label: 'Interior · Commercial' },
+      { src: 'assets/portfolio-08.jpg', alt: 'Indoor-Outdoor Spatial Flow',       label: 'Architecture · Transition' },
+      { src: 'assets/portfolio-09.jpg', alt: 'Traditional Study & Millwork',      label: 'Interior · Atmospheric' },
+      { src: 'assets/portfolio-10.jpg', alt: 'Covered Outdoor Entertainment Area', label: 'Exterior · Living' },
+      { src: 'assets/portfolio-11.jpg', alt: 'Minimalist Monolithic Kitchen',     label: 'Interior · Contemporary' },
+      { src: 'assets/portfolio-12.jpg', alt: 'Tundra Grey Driveway Hardscaping',  label: 'Exterior · Hardscape' },
     ];
 
-    /* Dynamic Asymmetric Grid Layout Classes */
-    const layoutClasses = [
-      "md:col-span-8",                  // 1: Large left
-      "md:col-span-4 md:mt-24",         // 2: Small right, pushed down
-      "md:col-span-4",                  // 3: Small left
-      "md:col-span-8",                  // 4: Large right
-      "md:col-span-12",                 // 5: Full width
-      "md:col-span-6",                  // 6: Half split
-      "md:col-span-6",                  // 7: Half split
-      "md:col-span-8 md:col-start-3",   // 8: Centered large
-      "md:col-span-5",                  // 9: Medium left
-      "md:col-span-7 md:mt-16",         // 10: Large right
-      "md:col-span-7",                  // 11: Large left
-      "md:col-span-5 md:-mt-16",        // 12: Medium right, pulled up
-      "md:col-span-12",                 // 13: Full width
-      "md:col-span-4",                  // 14: Small left
-      "md:col-span-4 md:mt-12",         // 15: Small middle
-      "md:col-span-4"                   // 16: Small right
-    ];
-
-    /* Render Projects */
-    function renderGrid() {
-      const container = document.getElementById('portfolio-container');
-      container.innerHTML = PROJECTS.map((p, idx) => {
-        const spanClass = layoutClasses[idx % layoutClasses.length];
-        
-        // Show indicator if the project has reference files
-        const refIndicator = (p.refs && p.refs.length > 0) 
-          ? `<div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-sm text-[9px] uppercase tracking-widest border border-white/20 flex items-center gap-2 z-10"><span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>Includes Concepts & Plans</div>` 
-          : '';
-
-        return `
-          <div class="project-card group cursor-pointer flex flex-col gap-5 ${spanClass}"
-               onclick="openLightbox(${idx})">
-            <div class="img-container relative w-full ${[4, 5, 6, 7, 12].includes(idx) ? 'aspect-[16/9]' : 'aspect-[4/3]'}">
-              ${refIndicator}
-              <img src="${p.src}" alt="${p.title}" class="img-zoom w-full h-full object-cover" loading="lazy">
-            </div>
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 px-1">
-              <h3 class="text-lg md:text-xl font-serif text-white">${p.title}</h3>
-              <p class="text-[10px] tracking-[0.15em] uppercase text-neutral-500">${p.category}</p>
-            </div>
+    const grid = document.getElementById('portfolio-grid');
+    PORTFOLIO.forEach((item, idx) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'portfolio-item relative overflow-hidden bg-vc-dark cursor-pointer';
+      wrapper.style.aspectRatio = '4/3';
+      wrapper.setAttribute('data-idx', idx);
+      wrapper.setAttribute('role', 'button');
+      wrapper.setAttribute('tabindex', '0');
+      wrapper.setAttribute('aria-label', `Open ${item.alt}`);
+      wrapper.innerHTML = `
+        <img class="portfolio-img" src="${item.src}" alt="${item.alt}"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="img-placeholder" style="display:none;">
+          <div style="text-align:center;padding:1rem;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="margin:0 auto 0.5rem">
+              <rect width="40" height="40" rx="2" fill="#1f1f22"/>
+              <path d="M6 30l8-10 6 8 5-6 7 8H6z" fill="#2d2d31"/>
+              <circle cx="28" cy="12" r="4" fill="#2d2d31"/>
+            </svg>
+            <p style="font-size:0.65rem;letter-spacing:0.15em;color:#52525b;font-family:'Inter',sans-serif">${String(idx+1).padStart(2,'0')}</p>
           </div>
-        `;
-      }).join('');
-    }
+        </div>
+        <div class="portfolio-overlay absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          <p class="text-vc-zinc text-xs tracking-widest uppercase">${item.label}</p>
+          <p class="text-white text-sm font-light mt-0.5">${item.alt}</p>
+        </div>
+        <div class="absolute inset-0 border border-white/0 hover:border-white/10 transition-colors duration-300 pointer-events-none"></div>
+      `;
+      wrapper.classList.add('group');
+      wrapper.addEventListener('click', () => openLightbox(idx));
+      wrapper.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') openLightbox(idx); });
+      grid.appendChild(wrapper);
+    });
 
-    /* Lightbox handlers */
+    let currentIdx = 0;
+
     function openLightbox(idx) {
-      const p = PROJECTS[idx];
+      currentIdx = idx;
       const lb = document.getElementById('lightbox');
-      document.getElementById('lb-image').src = p.src;
-      
-      const refSection = document.getElementById('lb-references');
-      const refImgContainer = document.getElementById('lb-ref-img-container');
-      const refPdfContainer = document.getElementById('lb-ref-pdf-container');
-      
-      refImgContainer.innerHTML = '';
-      refPdfContainer.innerHTML = '';
-      
-      // Inject References if they exist
-      if (p.refs && p.refs.length > 0) {
-        refSection.classList.remove('hidden');
-        let hasImages = false;
-        
-        p.refs.forEach(ref => {
-          if (ref.type === 'img') {
-            refImgContainer.innerHTML += `<div class="bg-[#111] border border-neutral-800 p-2"><img src="${ref.src}" class="w-full h-auto object-contain" loading="lazy" onclick="event.stopPropagation()"></div>`;
-            hasImages = true;
-          } else if (ref.type === 'pdf') {
-            refPdfContainer.innerHTML += `<a href="${ref.src}" target="_blank" onclick="event.stopPropagation()" class="px-8 py-4 border border-neutral-600 text-[10px] tracking-widest uppercase hover:bg-white hover:text-black transition-colors font-medium">${ref.label}</a>`;
-          }
-        });
-        
-        if (!hasImages) refImgContainer.classList.add('hidden');
-        else refImgContainer.classList.remove('hidden');
-
-      } else {
-        refSection.classList.add('hidden');
-      }
-
+      const img = document.getElementById('lightbox-img');
+      img.src = PORTFOLIO[idx].src;
+      img.alt = PORTFOLIO[idx].alt;
+      updateCounter();
       lb.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
@@ -450,23 +506,61 @@
       document.body.style.overflow = '';
     }
 
-    /* Vimeo Embed */
-    function playFilm() {
-      const box = document.getElementById('film-player');
-      const cover = document.getElementById('film-cover');
-      box.innerHTML = `
-        <iframe
-          src="https://player.vimeo.com/video/1096478641?h=6fb4eca388&autoplay=1&color=ffffff&title=0&byline=0&portrait=0"
-          class="w-full h-full border-0"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen>
-        </iframe>`;
-      cover.classList.add('hidden');
-      box.classList.remove('hidden');
+    function shiftLightbox(dir) {
+      currentIdx = (currentIdx + dir + PORTFOLIO.length) % PORTFOLIO.length;
+      const img = document.getElementById('lightbox-img');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = PORTFOLIO[currentIdx].src;
+        img.alt = PORTFOLIO[currentIdx].alt;
+        img.style.opacity = '1';
+        updateCounter();
+      }, 120);
     }
 
-    // Initialize
-    renderGrid();
+    function updateCounter() {
+      document.getElementById('lb-counter').textContent =
+        `${String(currentIdx + 1).padStart(2,'0')} / ${String(PORTFOLIO.length).padStart(2,'0')}`;
+    }
+
+    const lbImg = document.getElementById('lightbox-img');
+    lbImg.style.transition = 'opacity 0.15s ease';
+
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      const lb = document.getElementById('lightbox');
+      if (!lb.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft')  shiftLightbox(-1);
+      if (e.key === 'ArrowRight') shiftLightbox(1);
+    });
+
+    ['lb-prev','lb-next'].forEach(id => {
+      const btn = document.getElementById(id);
+      btn.addEventListener('mouseenter', () => btn.style.background = 'rgba(255,255,255,0.18)');
+      btn.addEventListener('mouseleave', () => btn.style.background = 'rgba(255,255,255,0.08)');
+    });
+
+    function playFilm() {
+      const VIMEO_ID = '1096478641';
+      const VIMEO_HASH = '6fb4eca388';
+      const container = document.getElementById('film-iframe');
+      const thumb = document.getElementById('film-thumb');
+      container.innerHTML = `
+        <iframe
+          src="https://player.vimeo.com/video/${VIMEO_ID}?h=${VIMEO_HASH}&autoplay=1&color=ffffff&title=0&byline=0&portrait=0"
+          style="width:100%;height:100%;border:none;"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          title="View Casa — Cinematic Architectural Film">
+        </iframe>`;
+      thumb.style.display = 'none';
+      container.style.display = 'block';
+    }
   </script>
+
 </body>
 </html>
