@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request a Quote — View Casa CGI Studio</title>
+  <meta name="description" content="Send View Casa a short project brief. We reply within one working day with a clear, fixed quote." />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQXWZNQ425"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JQXWZNQ425');
+  </script>
+
+  <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:3692938,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'vc-black':  '#0B0B0C',
+            'vc-dark':   '#111113',
+            'vc-border': '#1F1F22',
+            'vc-zinc':   '#A1A1AA',
+          },
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          letterSpacing: { widest: '0.25em' },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body { background: #0B0B0C; color: #FFFFFF; font-family: 'Inter', sans-serif; }
+
+    .vc-input {
+      width: 100%;
+      background: #111113;
+      border: 1px solid #1F1F22;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      padding: 0.9rem 1rem;
+      outline: none;
+      transition: border-color 0.25s ease, background 0.2s ease;
+      border-radius: 0;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .vc-input::placeholder { color: #52525b; }
+    .vc-input:focus {
+      border-color: #ffffff;
+      background: #18181a;
+    }
+    .vc-input:hover { border-color: #3f3f46; }
+
+    .field-wrap { position: relative; }
+    .field-label {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #A1A1AA;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: #ffffff;
+      color: #0B0B0C;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 1.1rem 2rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .submit-btn:hover { background: #e4e4e7; transform: translateY(-1px); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled {
+      background: #27272a;
+      color: #52525b;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .accordion-item { border-bottom: 1px solid #1F1F22; }
+    .accordion-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      gap: 1rem;
+      transition: color 0.2s;
+    }
+    .accordion-btn:hover { color: #A1A1AA; }
+    .accordion-icon {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border: 1px solid #3f3f46;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.2s;
+    }
+    .accordion-btn[aria-expanded="true"] .accordion-icon {
+      transform: rotate(45deg);
+      border-color: #ffffff;
+    }
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.3s ease;
+    }
+    .accordion-body.open { max-height: 300px; }
+    .accordion-body p {
+      color: #A1A1AA;
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.75;
+      padding-bottom: 1.25rem;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .trust-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      border: 1px solid #1F1F22;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    #success-msg {
+      display: none;
+      background: #0f2d16;
+      border: 1px solid #166534;
+      border-radius: 2px;
+      padding: 1rem 1.25rem;
+      margin-top: 1.25rem;
+    }
+    #success-msg.show { display: flex; }
+
+    .quote-header {
+      border-bottom: 1px solid #1F1F22;
+      background: rgba(11,11,12,0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #A1A1AA;
+      font-weight: 500;
+    }
+  </style>
+</head>
+
+<body class="bg-vc-black text-white antialiased">
+
+  <header class="quote-header sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+      <a href="index.html" class="text-white font-bold tracking-widest uppercase text-sm select-none hover:text-vc-zinc transition-colors">
+        VIEW CASA
+      </a>
+      <a href="index.html"
+         class="flex items-center gap-2 text-vc-zinc hover:text-white text-xs font-light tracking-wider uppercase transition-colors">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to Studio
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24">
+
+    <div class="mb-14 max-w-2xl">
+      <p class="section-label mb-4">Project Brief</p>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-tight mb-5">
+        Request a<br />Quote
+      </h1>
+      <p class="text-vc-zinc font-light leading-relaxed text-base max-w-lg">
+        Send the drawings and a short note on what you need. We reply within one working day with scope, timing, and a fixed price. Or email <a href="mailto:info@viewcasa.co" class="text-white underline underline-offset-4">info@viewcasa.co</a> directly.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-14 lg:gap-20 items-start">
+
+      <div>
+        <form
+          id="project-form"
+          action="https://formspree.io/f/mjgqbokz"
+          method="POST"
+          novalidate>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+            <div class="field-wrap">
+              <label class="field-label" for="f-name">Full Name <span class="text-white/40">*</span></label>
+              <input class="vc-input" type="text" id="f-name" name="name"
+                     placeholder="Your name" required autocomplete="name" />
+              <p class="err-msg hidden text-red-400 text-xs mt-1.5 font-light" data-for="f-name">Please enter your name.</p>
+            </div>
+            <div class="field-wrap">
+              <label class="field-label" for="f-email">Email Address <span class="text-white/40">*</span></label>
+              <input class="vc-input" type="email" id="f-email" name="email"
+                     placeholder="you@studio.com" required autocomplete="email" />
+              <p class="err-msg hidden text-red-400 text-xs mt-1.5 font-light" data-for="f-email">Please enter a valid email.</p>
+            </div>
+          </div>
+
+          <div class="field-wrap mb-5">
+            <label class="field-label" for="f-company">Studio / Company</label>
+            <input class="vc-input" type="text" id="f-company" name="company"
+                   placeholder="Studio or company name" autocomplete="organization" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+            <div class="field-wrap">
+              <label class="field-label" for="f-type">Project Type <span class="text-white/40">*</span></label>
+              <select class="vc-input" id="f-type" name="project_type" required style="color:#52525b;">
+                <option value="" disabled selected>Select type…</option>
+                <option value="exterior-cgi" style="background:#111113;color:#fff">Exterior stills</option>
+                <option value="interior-cgi" style="background:#111113;color:#fff">Interior stills</option>
+                <option value="exterior-interior" style="background:#111113;color:#fff">Exteriors and interiors</option>
+                <option value="animation" style="background:#111113;color:#fff">Short walkthrough film</option>
+                <option value="material-study" style="background:#111113;color:#fff">Material or lighting study</option>
+                <option value="unsure" style="background:#111113;color:#fff">Not sure yet</option>
+              </select>
+            </div>
+            <div class="field-wrap">
+              <label class="field-label" for="f-budget">Budget, if you have one</label>
+              <select class="vc-input" id="f-budget" name="budget_range" style="color:#52525b;">
+                <option value="" disabled selected>Optional</option>
+                <option value="under-1k" style="background:#111113;color:#fff">Under £1,000 / $1,300</option>
+                <option value="1k-3k" style="background:#111113;color:#fff">£1,000 – £3,000 / $1,300 – $4,000</option>
+                <option value="3k-8k" style="background:#111113;color:#fff">£3,000 – £8,000 / $4,000 – $10,000</option>
+                <option value="8k-plus" style="background:#111113;color:#fff">£8,000+ / $10,000+</option>
+                <option value="tbd" style="background:#111113;color:#fff">Quote me first</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-wrap mb-5">
+            <label class="field-label" for="f-overview">What do you need? <span class="text-white/40">*</span></label>
+            <textarea class="vc-input" id="f-overview" name="project_overview" rows="5"
+                      placeholder="Building type, location, how many stills or a film, deadline, and any views that matter most (street, dusk, kitchen, etc.)."
+                      required style="resize:vertical;min-height:140px;"></textarea>
+            <p class="err-msg hidden text-red-400 text-xs mt-1.5 font-light" data-for="f-overview">Add a short note — at least a sentence or two.</p>
+          </div>
+
+          <div class="field-wrap mb-8">
+            <label class="field-label" for="f-link">Drawings or reference link</label>
+            <input class="vc-input" type="url" id="f-link" name="cad_reference_link"
+                   placeholder="https://drive.google.com/…" />
+            <p class="text-vc-zinc text-xs font-light mt-2 leading-relaxed">
+              Google Drive, Dropbox, or WeTransfer. SketchUp, Revit, ArchiCAD, 3ds Max, or PDF / DWG plans are all fine. You can also send files after we reply.
+            </p>
+          </div>
+
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_subject" value="New project brief — View Casa" />
+
+          <button type="submit" class="submit-btn" id="submit-btn">
+            Send Brief
+          </button>
+
+          <div id="loading-state" class="hidden mt-4 flex items-center gap-3">
+            <div style="width:16px;height:16px;border:2px solid #3f3f46;border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;"></div>
+            <span class="text-vc-zinc text-sm font-light">Sending…</span>
+          </div>
+
+          <div id="success-msg" class="flex items-start gap-3" role="alert">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:1px">
+              <circle cx="9" cy="9" r="8" stroke="#22c55e" stroke-width="1.2"/>
+              <path d="M5.5 9l2.5 2.5 4.5-5" stroke="#22c55e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+              <p class="text-green-400 text-sm font-medium mb-0.5">Brief received</p>
+              <p class="text-green-600 text-xs font-light leading-relaxed">
+                Thank you. We’ll reply within one working day with scope and a fixed price.
+              </p>
+            </div>
+          </div>
+
+          <div id="error-msg" class="hidden mt-4 flex items-start gap-3 bg-red-950/30 border border-red-900/50 p-4" role="alert">
+            <p class="text-red-400 text-sm font-light">Something went wrong. Email us directly at <a href="mailto:info@viewcasa.co" class="underline">info@viewcasa.co</a>.</p>
+          </div>
+
+        </form>
+      </div>
+
+      <aside>
+        <div class="mb-12">
+          <p class="section-label mb-6">Common Questions</p>
+          <div id="faq-list">
+
+            <div class="accordion-item">
+              <button class="accordion-btn" aria-expanded="false" data-accordion="faq-1" type="button">
+                <span>What files can you work from?</span>
+                <span class="accordion-icon">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <line x1="5" y1="1" x2="5" y2="9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="1" y1="5" x2="9" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="accordion-body" id="faq-1">
+                <p>SketchUp (.skp), Revit, ArchiCAD, 3ds Max, and 2D CAD or PDF plans. If the model isn’t tidy, say so — we can still quote from drawings and a few reference images.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-btn" aria-expanded="false" data-accordion="faq-2" type="button">
+                <span>How long does a project take?</span>
+                <span class="accordion-icon">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <line x1="5" y1="1" x2="5" y2="9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="1" y1="5" x2="9" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="accordion-body" id="faq-2">
+                <p>Most stills land in <strong class="text-white font-medium">7 to 14 days</strong> once we have the files and the deposit. A single exterior is often faster. Put the real deadline in the brief and we’ll say yes or no before you pay.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-btn" aria-expanded="false" data-accordion="faq-3" type="button">
+                <span>What is included in revisions?</span>
+                <span class="accordion-icon">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <line x1="5" y1="1" x2="5" y2="9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="1" y1="5" x2="9" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="accordion-body" id="faq-3">
+                <p>Lighting and material tweaks on the agreed view are included. A new camera angle or a rebuilt room is quoted before we do it. Nothing extra starts without a written price.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-btn" aria-expanded="false" data-accordion="faq-4" type="button">
+                <span>What do we receive?</span>
+                <span class="accordion-icon">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <line x1="5" y1="1" x2="5" y2="9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="1" y1="5" x2="9" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="accordion-body" id="faq-4">
+                <p>Stills at print size (300 DPI) and a web-sized file. Films up to 4K. You get the finals after the balance is paid. We do not hand over the 3D scene unless that is agreed in the quote.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-btn" aria-expanded="false" data-accordion="faq-5" type="button">
+                <span>Do you sign NDAs?</span>
+                <span class="accordion-icon">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <line x1="5" y1="1" x2="5" y2="9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="1" y1="5" x2="9" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="accordion-body" id="faq-5">
+                <p>Yes. Say so in the brief and send your NDA with the drawings. We won’t publish the work without written permission.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="border-t border-vc-border pt-10 flex flex-col gap-6">
+          <p class="section-label mb-2">How we work</p>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <circle cx="7.5" cy="7.5" r="6.5" stroke="#A1A1AA" stroke-width="0.8"/>
+                <path d="M4.5 7.5l2 2 4-4" stroke="#A1A1AA" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-white text-sm font-medium mb-0.5">Print and web files</p>
+              <p class="text-vc-zinc text-xs font-light leading-relaxed">Stills sized for boards, decks, and websites. Films ready for a sales page or social.</p>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <path d="M7.5 1.5v4m0 4v4M1.5 7.5h4m4 0h4" stroke="#A1A1AA" stroke-width="0.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-white text-sm font-medium mb-0.5">You deal with the studio</p>
+              <p class="text-vc-zinc text-xs font-light leading-relaxed">The same people who quote the job do the work. No account layer in between.</p>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <rect x="2" y="3" width="11" height="9" rx="0.5" stroke="#A1A1AA" stroke-width="0.8"/>
+                <path d="M5 6.5h5M5 8.5h3" stroke="#A1A1AA" stroke-width="0.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-white text-sm font-medium mb-0.5">Price before we start</p>
+              <p class="text-vc-zinc text-xs font-light leading-relaxed">Fixed quote in writing. 50% to begin, 50% before finals. No surprise invoices.</p>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <path d="M7.5 2C4.46 2 2 4.46 2 7.5s2.46 5.5 5.5 5.5 5.5-2.46 5.5-5.5S10.54 2 7.5 2z" stroke="#A1A1AA" stroke-width="0.8"/>
+                <path d="M7.5 5v3l2 1" stroke="#A1A1AA" stroke-width="0.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-white text-sm font-medium mb-0.5">7–14 day stills</p>
+              <p class="text-vc-zinc text-xs font-light leading-relaxed">Standard stills. Rush only if we confirm the date in the quote.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer class="border-t border-vc-border mt-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+      <a href="index.html" class="text-white font-bold tracking-widest uppercase text-sm hover:text-vc-zinc transition-colors">VIEW CASA</a>
+      <p class="text-vc-zinc text-xs font-light tracking-wide text-center">
+        © 2026 View Casa CGI Studio. All rights reserved.
+      </p>
+      <a href="mailto:info@viewcasa.co" class="text-vc-zinc hover:text-white text-xs font-light tracking-wider uppercase transition-colors">
+        info@viewcasa.co
+      </a>
+    </div>
+  </footer>
+
+  <style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+
+  <script>
+    document.querySelectorAll('select').forEach(sel => {
+      sel.addEventListener('change', () => {
+        sel.style.color = sel.value ? '#ffffff' : '#52525b';
+      });
+    });
+
+    document.querySelectorAll('.accordion-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-accordion');
+        const body = document.getElementById(targetId);
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+        document.querySelectorAll('.accordion-btn').forEach(b => {
+          b.setAttribute('aria-expanded', 'false');
+          const bd = document.getElementById(b.getAttribute('data-accordion'));
+          if (bd) bd.classList.remove('open');
+        });
+
+        if (!isOpen) {
+          btn.setAttribute('aria-expanded', 'true');
+          body.classList.add('open');
+        }
+      });
+    });
+
+    const form = document.getElementById('project-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const loadingEl = document.getElementById('loading-state');
+    const successEl = document.getElementById('success-msg');
+    const errorEl = document.getElementById('error-msg');
+
+    const requiredFields = [
+      { id: 'f-name', test: v => v.trim().length >= 2 },
+      { id: 'f-email', test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+      { id: 'f-type', test: v => v.trim().length > 0 },
+      { id: 'f-overview', test: v => v.trim().length >= 20 },
+    ];
+
+    requiredFields.forEach(({ id, test }) => {
+      const input = document.getElementById(id);
+      const err = document.querySelector('[data-for="' + id + '"]');
+      if (!input) return;
+      input.addEventListener('blur', () => {
+        if (!test(input.value)) {
+          input.style.borderColor = '#7f1d1d';
+          if (err) err.classList.remove('hidden');
+        } else {
+          input.style.borderColor = '';
+          if (err) err.classList.add('hidden');
+        }
+      });
+      input.addEventListener('input', () => {
+        if (test(input.value)) {
+          input.style.borderColor = '';
+          if (err) err.classList.add('hidden');
+        }
+      });
+      input.addEventListener('change', () => {
+        if (test(input.value)) {
+          input.style.borderColor = '';
+          if (err) err.classList.add('hidden');
+        }
+      });
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      let valid = true;
+      requiredFields.forEach(({ id, test }) => {
+        const input = document.getElementById(id);
+        const err = document.querySelector('[data-for="' + id + '"]');
+        if (!input || !test(input.value)) {
+          if (input) input.style.borderColor = '#7f1d1d';
+          if (err) err.classList.remove('hidden');
+          valid = false;
+        }
+      });
+      if (!valid) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      loadingEl.classList.remove('hidden');
+      errorEl.classList.add('hidden');
+
+      try {
+        const data = new FormData(form);
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+
+        loadingEl.classList.add('hidden');
+
+        if (res.ok) {
+          successEl.classList.add('show');
+          form.reset();
+          document.querySelectorAll('select').forEach(s => { s.style.color = '#52525b'; });
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Brief';
+          successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (err) {
+        loadingEl.classList.add('hidden');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Brief';
+        errorEl.classList.remove('hidden');
+      }
+    });
+  </script>
+
+</body>
+</html>
